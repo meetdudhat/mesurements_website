@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Add New Data</h2>
+<p>Add your events, food items, and ingredients here.</p>
+
+<!-- Section 1: Add Event -->
+<h3>Add Event</h3>
+<form method="POST" action="{{ url_for('add') }}">
+    <label for="event_name">Event Name:</label>
+    <input type="text" id="event_name" name="event_name" required>
+
+    <label for="event_date">Event Date:</label>
+    <input type="date" id="event_date" name="event_date" required>
+
+    <label for="attendees">Number of Attendees:</label>
+    <input type="number" id="attendees" name="attendees" required>
+
+    <input type="submit" value="Submit Event">
+</form>
+
+<!-- Section 2: Add Food Item -->
+<h3>Add Food Item</h3>
+<form method="POST" action="{{ url_for('add') }}">
+    <label for="event_id">Select Event:</label>
+    <select id="event_id" name="event_id" required>
+        {% for event in events %}
+        <option value="{{ event.event_id }}">{{ event.event_label }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="food_item">Food Item:</label>
+    <input type="text" id="food_item" name="food_item" required>
+
+    <label for="quantity">Quantity:</label>
+    <input type="number" id="quantity" name="quantity" required>
+
+    <input type="submit" value="Submit Food Item">
+</form>
+
+<!-- Section 3: Add Ingredient -->
+<h3>Add Ingredient</h3>
+<form method="POST" action="{{ url_for('add') }}">
+    <label for="event_id">Select Event:</label>
+    <select id="event_id" name="event_id" required>
+        {% for event in events %}
+        <option value="{{ event.event_id }}">{{ event.event_label }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="food_item_id">Select Food Item:</label>
+    <select id="food_item_id" name="food_item_id" required>
+        {% for food in food_items %}
+        <option value="{{ food.food_item_id }}">{{ food.food_name }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="ingredient_item">Ingredient:</label>
+    <input type="text" id="ingredient_item" name="ingredient_item" required>
+
+    <label for="ingredient_quantity">Quantity:</label>
+    <input type="number" id="ingredient_quantity" name="ingredient_quantity" required>
+
+    <input type="submit" value="Submit Ingredient">
+</form>
+{% endblock %}
